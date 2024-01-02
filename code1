@@ -1,0 +1,408 @@
+:import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // A. Shuffle an array
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int num : array) {
+            arrayList.add(num);
+        }
+        Collections.shuffle(arrayList);
+        System.out.println("Shuffled array: " + arrayList);
+
+        // B. Convert Roman Number to Integer
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a Roman Number: ");
+        String romanNumber = scanner.nextLine().toUpperCase();
+        int integerNumber = romanToInteger(romanNumber);
+        System.out.println("Equivalent integer: " + integerNumber);
+
+        // C. Check if the input is a pangram
+        System.out.print("Enter a sentence to check for pangram: ");
+        String sentence = scanner.nextLine().toLowerCase();
+        boolean isPangram = isPangram(sentence);
+        if (isPangram) {
+            System.out.println("The sentence is a pangram.");
+        } else {
+            System.out.println("The sentence is not a pangram.");
+        }
+    }
+
+   
+    public static int romanToInteger(String s) {
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (i < s.length() - 1 && romanToInt(s.charAt(i)) < romanToInt(s.charAt(i + 1))) {
+                result -= romanToInt(s.charAt(i));
+            } else {
+                result += romanToInt(s.charAt(i));
+            }
+        }
+        return result;
+    }
+
+    public static int romanToInt(char c) {
+        switch (c) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+
+
+    public static boolean isPangram(String sentence) {
+        boolean[] alphabet = new boolean[26];
+        for (char c : sentence.toCharArray()) {
+            if (Character.isLetter(c)) {
+                alphabet[c - 'a'] = true;
+            }
+        }
+        for (boolean letter : alphabet) {
+            if (!letter) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+2================================================
+
+function reverseWords(sentence) {
+   
+    const words = sentence.split(' ');
+
+
+    const reversedWords = words.map(word => {
+        return word.split('').reverse().join('');
+    });
+
+   
+    const reversedSentence = reversedWords.join(' ');
+
+    return reversedSentence;
+}
+
+const inputSentence = "This is a sunny day";
+const reversedSentence = reverseWords(inputSentence);
+console.log("Reversed Sentence: " + reversedSentence);
+
+===========
+function sortArrayDescending(arr) {
+    return arr.sort((a, b) => b - a);
+}
+
+const inputArray = [5, 2, 9, 1, 8];
+const sortedArray = sortArrayDescending(inputArray);
+console.log("Sorted Array in Descending Order: " + sortedArray);
+
+=================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendToDisplay('/')">/</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+css 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.calculator {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    padding: 10px;
+}
+
+#display {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+javascript
+
+let displayValue = '';
+
+function appendToDisplay(value) {
+    displayValue += value;
+    document.getElementById('display').value = displayValue;
+}
+
+function clearDisplay() {
+    displayValue = '';
+    document.getElementById('display').value = displayValue;
+}
+
+function calculateResult() {
+    try {
+        displayValue = eval(displayValue);
+        document.getElementById('display').value = displayValue;
+    } catch (error) {
+        document.getElementById('display').value = 'Error';
+    }
+}
+=============
+
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Survey Form</h1>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select id="country" required>
+                    <option value="usa">USA</option>
+                    <option value="canada">Canada</option>
+                    <option value="uk">UK</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <input type="checkbox" id="male" value="Male"> <label for="male">Male</label>
+                <input type="checkbox" id="female" value="Female"> <label for="female">Female</label>
+                <input type="checkbox" id="other" value="Other"> <label for="other">Other</label>
+            </div>
+            <div class="form-group">
+                <label for="profession">Profession:</label>
+                <input type="text" id="profession" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" required>
+            </div>
+            <div class="buttons">
+                <button type="button" id="resetButton" onclick="resetForm()">Reset</button>
+                <button type="button" id="submitButton" onclick="submitForm()">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="popup" id="popup">
+        <div class="popup-content" id="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Survey Form Submission</h2>
+            <div id="popup-results"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+===================
+css
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    margin-right: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup h2 {
+    margin-top: 0;
+}
+
+.popup-results {
+    text-align: left;
+}
+=============
+javascript
+
+function resetForm() {
+    document.getElementById('surveyForm').reset();
+}
+
+function submitForm() {
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const dob = document.getElementById('dob').value;
+    const country = document.getElementById('country').value;
+    const genderCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    const profession = document.getElementById('profession').value;
+    const email = document.getElementById('email').value;
+    const mobile = document.getElementById('mobile').value;
+
+    if (
+        !firstName ||
+        !lastName ||
+        !dob ||
+        !country ||
+        genderCheckboxes.length === 0 ||
+        !profession ||
+        !email ||
+        !mobile
+    ) {
+        alert('Please fill in all the required fields.');
+        return;
+    }
+
+    const gender = [...genderCheckboxes].map(checkbox => checkbox.value).join(', ');
+
+    const results = `
+        First Name: ${firstName}
+        Last Name: ${lastName}
+        Date of Birth: ${dob}
+        Country: ${country}
+        Gender: ${gender}
+        Profession: ${profession}
+        Email: ${email}
+        Mobile Number: ${mobile}
+    `;
+
+    document.getElementById('popup-results').textContent = results;
+
+    document.getElementById('popup').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('surveyForm').reset();
+}
